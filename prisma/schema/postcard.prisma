@@ -1,0 +1,15 @@
+model PostCard {
+    id        String   @id @unique @default(cuid())
+    createdAt DateTime @default(now()) @db.Timestamptz(6)
+    updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+
+    sendAt   DateTime @map("send_at") @db.Timestamptz(6)
+    imageUrl String   @map("image_url")
+    likes    Int      @default(0)
+
+    sendToUserId   String @map("send_to_user_id")
+    sendFromUserId String @map("send_from_user_id")
+
+    sendTo   User @relation("ReceivedPostCards", fields: [sendToUserId], references: [id], onDelete: Cascade)
+    sendFrom User @relation("SentPostCards", fields: [sendFromUserId], references: [id], onDelete: Cascade)
+}

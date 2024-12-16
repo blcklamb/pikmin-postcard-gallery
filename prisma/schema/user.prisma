@@ -1,0 +1,39 @@
+model User {
+  id        String   @id @unique @default(cuid())
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+
+  name             String?
+  image            String?
+  emailVerified    DateTime? @map("email_verified")
+  hashedPassword   String?   @map("hashed_password")
+  favoritePikminId Int       @unique @map("favorite_pikmin_id")
+
+  accounts         Account[]
+  sessions         Session[]
+  sentPostCard     PostCard[] @relation("SentPostCards")
+  receivedPostCard PostCard[] @relation("ReceivedPostCards")
+  pikmin           Pikmin     @relation(fields: [favoritePikminId], references: [id])
+
+  @@map("user")
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  access_token             String?
+  expires_at               Int?
+  refresh_token_expires_in Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("account")
+}
