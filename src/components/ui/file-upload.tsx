@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { cn } from "@/lib/utils";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { IconSquareX, IconUpload } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
@@ -28,19 +28,20 @@ const secondaryVariant = {
 
 export const FileUpload = ({
   onChange,
+  uploadedImageUrl,
 }: {
   onChange?: (files: File[]) => void;
+  uploadedImageUrl?: string;
 }) => {
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (newFiles: File[]) => {
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    setFiles([...newFiles]);
     onChange && onChange(newFiles);
   };
 
   const deleteFiles = () => {
-    console.log("hihi");
     setFiles([]);
     onChange && onChange([]);
   };
@@ -58,12 +59,18 @@ export const FileUpload = ({
     },
   });
 
+  useEffect(() => {
+    if (uploadedImageUrl?.length === 0 || !uploadedImageUrl) {
+      deleteFiles();
+    }
+  }, [uploadedImageUrl]);
+
   return (
     <div className="w-full" {...getRootProps()}>
       <motion.div
         onClick={handleClick}
         whileHover="animate"
-        className="p-10 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden"
+        className=" group/file block rounded-lg cursor-pointer w-full relative overflow-hidden"
       >
         <input
           ref={fileInputRef}

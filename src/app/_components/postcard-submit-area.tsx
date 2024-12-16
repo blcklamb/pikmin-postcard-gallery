@@ -12,12 +12,15 @@ import { submitPostCard } from "@/module/postcard.action";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField } from "@/components/ui/form";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 interface PostcardSumbitAreaProps {
   users: AllUser[];
 }
 
 export function PostcardSubmitArea({ users }: PostcardSumbitAreaProps) {
+  const { toast } = useToast();
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
   });
@@ -36,6 +39,10 @@ export function PostcardSubmitArea({ users }: PostcardSumbitAreaProps) {
 
   const onSubmit = (values: FormSchemaType) => {
     submitPostCard(values);
+    toast({
+      title: "인증 완료!",
+    });
+    form.reset();
   };
 
   return (
@@ -74,7 +81,7 @@ export function PostcardSubmitArea({ users }: PostcardSumbitAreaProps) {
             name="sendAt"
             render={({ field }) => (
               <DatePicker
-                initialDate={field.value}
+                selectedData={field.value}
                 onChangeFormData={field.onChange}
               />
             )}
@@ -83,7 +90,10 @@ export function PostcardSubmitArea({ users }: PostcardSumbitAreaProps) {
             control={form.control}
             name="postCardImageUrl"
             render={({ field }) => (
-              <ClipboardInput onChangeFormData={field.onChange} />
+              <ClipboardInput
+                uploadedImageUrl={field.value}
+                onChangeFormData={field.onChange}
+              />
             )}
           />
           <Button type="submit">엽서 인증하기</Button>

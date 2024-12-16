@@ -5,6 +5,9 @@ class User {
   async getAllUsers() {
     return db.user.findMany({
       include: ALL_USER,
+      orderBy: {
+        name: "asc",
+      },
     });
   }
 
