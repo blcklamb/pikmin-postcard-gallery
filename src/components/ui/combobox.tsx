@@ -18,13 +18,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useState } from "react";
-import { Select } from "@/type/form";
+import { UserSelect } from "@/type/form";
+import Image from "next/image";
 
 interface ComboboxProps {
-  data: Select[];
+  data: UserSelect[];
   placeholder: string;
-  onChangeFormData: (data: Select) => void;
-  selectedData?: Select;
+  onChangeFormData: (data: UserSelect) => void;
+  selectedData?: UserSelect;
 }
 
 export function Combobox({
@@ -35,10 +36,10 @@ export function Combobox({
 }: ComboboxProps) {
   const [open, setOpen] = useState(false);
 
-  const getValueByLabel = (searchData: Select[], label: string) => {
+  const getValueByLabel = (searchData: UserSelect[], label: string) => {
     return searchData.find((element) => element?.label === label)?.value;
   };
-  const getLabelByValue = (searchData: Select[], value: string) => {
+  const getLabelByValue = (searchData: UserSelect[], value: string) => {
     return searchData.find((element) => element?.value === value)?.label;
   };
 
@@ -51,6 +52,14 @@ export function Combobox({
           aria-expanded={open}
           className="w-[240px] justify-between"
         >
+          {selectedData?.pikminImageUrl && (
+            <Image
+              alt={"favorite-pikmin"}
+              src={selectedData?.pikminImageUrl || ""}
+              width={20}
+              height={20}
+            />
+          )}
           {selectedData?.label
             ? getValueByLabel(data, selectedData.label)
             : placeholder}
@@ -68,14 +77,10 @@ export function Combobox({
                   key={element?.label}
                   value={element?.value}
                   onSelect={(currentValue) => {
-                    onChangeFormData(
-                      currentValue === selectedData?.value
-                        ? null
-                        : {
-                            value: currentValue,
-                            label: getLabelByValue(data, currentValue) || "",
-                          }
-                    );
+                    onChangeFormData({
+                      value: currentValue,
+                      label: getLabelByValue(data, currentValue) || "",
+                    });
                     setOpen(false);
                   }}
                 >
@@ -87,7 +92,13 @@ export function Combobox({
                         : "opacity-0"
                     )}
                   />
-                  {element?.value}
+                  {element?.value}({element?.label})
+                  <Image
+                    alt={"favorite-pikmin"}
+                    src={element?.pikminImageUrl || ""}
+                    width={20}
+                    height={20}
+                  />
                 </CommandItem>
               ))}
             </CommandGroup>
