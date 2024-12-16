@@ -43,7 +43,7 @@ export const CanvasRevealEffect = ({
         />
       </div>
       {showGradient && (
-        <div className="absolute inset-0 bg-gradient-to-t from-p-organge to-[84%]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-p-orange to-[84%]" />
       )}
     </div>
   );

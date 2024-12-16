@@ -1,6 +1,7 @@
 import { FormSchemaType } from "@/type/form";
 import db from "./db";
 import { user } from "./user.service";
+import { ALL_POSTCARD } from "@/type/postcard.type";
 
 class PostCard {
   async createPostCard(data: FormSchemaType) {
@@ -18,6 +19,12 @@ class PostCard {
         imageUrl: data.postCardImageUrl,
         sendAt: data.sendAt,
       },
+    });
+  }
+
+  async getAllPostCard() {
+    return await db.postCard.findMany({
+      include: ALL_POSTCARD,
     });
   }
 }
