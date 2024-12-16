@@ -1,13 +1,14 @@
 model User {
-  id        String   @id @unique @default(cuid())
+  id        Int      @id @unique @default(autoincrement())
   createdAt DateTime @default(now()) @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
 
   name             String?
+  nickname         String?
   image            String?
   emailVerified    DateTime? @map("email_verified")
   hashedPassword   String?   @map("hashed_password")
-  favoritePikminId Int       @unique @map("favorite_pikmin_id")
+  favoritePikminId Int       @map("favorite_pikmin_id")
 
   accounts         Account[]
   sessions         Session[]
@@ -20,7 +21,7 @@ model User {
 
 model Account {
   id                       String  @id @default(cuid())
-  userId                   String
+  userId                   Int
   type                     String
   provider                 String
   providerAccountId        String
