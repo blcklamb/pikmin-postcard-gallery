@@ -12,7 +12,6 @@ import { submitPostCard } from "@/module/postcard.action";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 
 interface PostcardSumbitAreaProps {

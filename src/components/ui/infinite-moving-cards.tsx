@@ -2,11 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { AllPostcard } from "@/type/postcard.type";
-import {
-  IconArrowBigRightFilled,
-  IconArrowRightRhombusFilled,
-} from "@tabler/icons-react";
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import { IconArrowRightRhombusFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -28,6 +24,7 @@ export const InfiniteMovingCards = ({
 
   useEffect(() => {
     addAnimation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [start, setStart] = useState(false);
   function addAnimation() {
@@ -88,7 +85,7 @@ export const InfiniteMovingCards = ({
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, idx) => (
+        {items.map((item) => (
           <li
             className="w-[300px] max-w-full relative bg-p-gray rounded-2xl border border-b-0 flex-shrink-0 y  px-8 py-6 md:w-[450px]"
             key={item.id}

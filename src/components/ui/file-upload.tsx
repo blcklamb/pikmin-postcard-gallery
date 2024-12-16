@@ -63,6 +63,7 @@ export const FileUpload = ({
     if (uploadedImageUrl?.length === 0 || !uploadedImageUrl) {
       deleteFiles();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadedImageUrl]);
 
   return (

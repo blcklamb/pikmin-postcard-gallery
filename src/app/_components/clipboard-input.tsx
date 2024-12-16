@@ -22,7 +22,9 @@ export function ClipboardInput({
       file: files[0],
       bucketName: "images",
     });
-    url && onChangeFormData(url);
+    if (url) {
+      onChangeFormData(url);
+    }
   };
 
   return (
