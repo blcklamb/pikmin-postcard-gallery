@@ -6,10 +6,9 @@ import { getComboboxFormatFromRawData } from "@/lib/format-data";
 import { cn } from "@/lib/utils";
 import { AllPostcard } from "@/type/postcard.type";
 import { AllUser } from "@/type/user.type";
-import { ArrowRightIcon, Icon, RotateCw } from "lucide-react";
-import Image from "next/image";
 import SpinArrowButton from "./spin-arrow-button";
 import { useRouter } from "next/navigation";
+import Postcard from "./postcard";
 
 interface PostCardFilterAreaProps {
   users: AllUser[];
@@ -77,24 +76,7 @@ export function PostCardFilterArea({
         )}
       >
         {postCards.map((ele) => (
-          <div className="break-inside-avoid-column p-6 rounded-lg bg-p-orange mb-2 flex flex-col gap-3">
-            <Image
-              alt="postcard-image"
-              src={ele.imageUrl || ""}
-              width={400}
-              height={400}
-              className="hover:scale-105 transition-all ease-linear"
-            />
-            <div className="flex gap-1 items-center text-p-white font-bold">
-              <div>
-                {ele.sendFrom.nickname}({ele.sendFrom.name})
-              </div>
-              <ArrowRightIcon className="size-4" />
-              <div>
-                {ele.sendFrom.nickname}({ele.sendTo.name})
-              </div>
-            </div>
-          </div>
+          <Postcard data={ele} key={ele.id} />
         ))}
       </div>
     </div>
