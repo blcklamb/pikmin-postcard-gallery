@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { AllPostcard } from "@/type/postcard.type";
-import { IconArrowRightRhombusFilled } from "@tabler/icons-react";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -108,11 +108,11 @@ export const InfiniteMovingCards = ({
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex gap-1 items-center">
-                  <span className="text-sm md:text-base lg:text-lg font-normal">
+                  <span className="text-sm md:text-base lg:text-lg font-bold">
                     {item.sendFrom.nickname} ({item.sendFrom.name})
                   </span>
-                  <IconArrowRightRhombusFilled className="stroke-black" />
-                  <span className="text-sm md:text-base lg:text-lg font-normal">
+                  <ArrowRightIcon className="stroke-black" />
+                  <span className="text-sm md:text-base lg:text-lg font-bold">
                     {item.sendTo.nickname} ({item.sendTo.name})
                   </span>
                 </span>

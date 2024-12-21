@@ -24,15 +24,6 @@ export default async function HomePage({
           보내봐요 엽서의 숲
         </div>
         <div className="w-full h-full relative flex items-center">
-          <SparklesCore
-            background="transparent"
-            minSize={0.4}
-            maxSize={1}
-            particleDensity={1000}
-            className="w-full h-full absolute z-30"
-            particleColor="#FFFFFF"
-          />
-
           <InfiniteMovingCards
             items={allPostcards}
             direction="right"
