@@ -9,6 +9,8 @@ import { AllUser } from "@/type/user.type";
 import SpinArrowButton from "./spin-arrow-button";
 import { useRouter } from "next/navigation";
 import Postcard from "./postcard";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface PostCardFilterAreaProps {
   users: AllUser[];
@@ -45,6 +47,12 @@ export function PostCardFilterArea({
 
   return (
     <div className="px-4 flex flex-col gap-6 mt-10 items-center min-h-screen">
+      <Button size={"lg"}>
+        <Link href={"/submit"} className="font-extrabold text-lg">
+          ✨ 엽서 제출하기
+        </Link>
+      </Button>
+
       <div className="md:max-w-[1200px] md:mx-auto max-pc:w-full flex-col sm:flex-row flex items-center  justify-between gap-4 sm:gap-10 px-4">
         <Combobox
           selectedData={{
