@@ -108,11 +108,11 @@ export const InfiniteMovingCards = ({
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex gap-1 items-center">
-                  <span className="text-sm md:text-md lg:text-lg leading-[1.6]  font-normal">
+                  <span className="text-sm md:text-base lg:text-lg font-normal">
                     {item.sendFrom.nickname} ({item.sendFrom.name})
                   </span>
                   <IconArrowRightRhombusFilled className="stroke-black" />
-                  <span className="text-sm md:text-md lg:text-lg font-normal">
+                  <span className="text-sm md:text-base lg:text-lg font-normal">
                     {item.sendTo.nickname} ({item.sendTo.name})
                   </span>
                 </span>

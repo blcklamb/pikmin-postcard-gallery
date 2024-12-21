@@ -27,6 +27,29 @@ class PostCard {
       include: ALL_POSTCARD,
     });
   }
+  async getFilteredPostcards(sendTo?: string, sendFrom?: string) {
+    const sendToUser = sendTo && (await user.getUserIdFromUserName(sendTo));
+    const sendFromUser =
+      sendFrom && (await user.getUserIdFromUserName(sendFrom));
+
+    const whereClause: any = {};
+
+    if (sendToUser) {
+      whereClause.sendToUserId = sendToUser.id;
+    }
+
+    if (sendFromUser) {
+      whereClause.sendFromUserId = sendFromUser.id;
+    }
+
+    return db.postCard.findMany({
+      where: whereClause,
+      include: ALL_POSTCARD,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }
 }
 
 export const postCard = new PostCard();

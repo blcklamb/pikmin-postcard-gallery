@@ -1,9 +1,22 @@
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { postCard } from "@/module/postcard.service";
+import { PostCardFilterArea } from "./_components/postcard-filter-area";
+import { user } from "@/module/user.service";
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const allPostcards = await postCard.getAllPostCard();
+  const allUsers = await user.getAllUsers();
+
+  const filteredPostcards = await postCard.getFilteredPostcards(
+    searchParams.sendTo as string,
+    searchParams.sendFrom as string
+  );
+
   return (
     <div className="flex flex-col gap-4">
       <div className="py-10  flex flex-col antialiased bg-gradient-to-r from-green-500 to-slate-500 items-center relative overflow-hidden">
@@ -27,6 +40,7 @@ export default async function HomePage() {
           />
         </div>
       </div>
+      <PostCardFilterArea users={allUsers} postCards={filteredPostcards} />
     </div>
   );
 }
