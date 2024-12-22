@@ -111,7 +111,7 @@ export const InfiniteMovingCards = ({
                   <span className="text-sm md:text-base lg:text-lg font-bold">
                     {item.sendFrom.nickname} ({item.sendFrom.name})
                   </span>
-                  <ArrowRightIcon className="stroke-black" />
+                  <ArrowRightIcon className="stroke-black size-4" />
                   <span className="text-sm md:text-base lg:text-lg font-bold">
                     {item.sendTo.nickname} ({item.sendTo.name})
                   </span>
