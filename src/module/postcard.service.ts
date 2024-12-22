@@ -32,6 +32,7 @@ class PostCard {
     const sendFromUser =
       sendFrom && (await user.getUserIdFromUserName(sendFrom));
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const whereClause: any = {};
 
     if (sendToUser) {

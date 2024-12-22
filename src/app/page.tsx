@@ -1,5 +1,4 @@
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import { SparklesCore } from "@/components/ui/sparkles";
 import { postCard } from "@/module/postcard.service";
 import { PostCardFilterArea } from "./_components/postcard-filter-area";
 import { user } from "@/module/user.service";
