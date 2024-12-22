@@ -89,10 +89,15 @@ export function PostcardSubmitArea({ users }: PostcardSumbitAreaProps) {
             control={form.control}
             name="postCardImageUrl"
             render={({ field }) => (
-              <ClipboardInput
-                uploadedImageUrl={field.value}
-                onChangeFormData={field.onChange}
-              />
+              <>
+                <ClipboardInput
+                  uploadedImageUrl={field.value}
+                  onChangeFormData={field.onChange}
+                />
+                <div className="text-gray-700 text-sm font-light">
+                  사진은 엽서 크기에 맞게 잘라서 업로드해주세요
+                </div>
+              </>
             )}
           />
           <Button type="submit">엽서 인증하기</Button>
