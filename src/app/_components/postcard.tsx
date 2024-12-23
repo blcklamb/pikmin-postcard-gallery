@@ -31,7 +31,7 @@ export default function Postcard({ data }: PostcardProps) {
         </div>
         <ArrowRightIcon className="size-4" />
         <div>
-          {data.sendFrom.nickname}({data.sendTo.name})
+          {data.sendTo.nickname}({data.sendTo.name})
         </div>
       </div>
     </div>

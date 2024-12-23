@@ -78,7 +78,7 @@ export function PostCardFilterArea({
       </div>
       <div
         className={cn(
-          "columns-1 gap-2 ",
+          "columns-1 gap-2 lg:columns-3",
           postCards.length < 2 && "md:columns-1",
           postCards.length >= 2 && "md:columns-2"
         )}
