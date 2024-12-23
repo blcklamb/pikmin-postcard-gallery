@@ -25,6 +25,9 @@ class PostCard {
   async getAllPostCard() {
     return await db.postCard.findMany({
       include: ALL_POSTCARD,
+      orderBy: {
+        sendAt: "desc",
+      },
     });
   }
   async getFilteredPostcards(sendTo?: string, sendFrom?: string) {
@@ -47,7 +50,7 @@ class PostCard {
       where: whereClause,
       include: ALL_POSTCARD,
       orderBy: {
-        createdAt: "desc",
+        sendAt: "desc",
       },
     });
   }

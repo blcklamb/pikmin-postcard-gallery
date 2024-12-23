@@ -22,6 +22,9 @@ export function PostcardSubmitArea({ users }: PostcardSumbitAreaProps) {
   const { toast } = useToast();
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      sendAt: new Date(),
+    },
   });
 
   const getComboboxFormatFromRawData = (usersData: AllUser[]): UserSelect[] => {

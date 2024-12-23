@@ -2,6 +2,7 @@ import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { postCard } from "@/module/postcard.service";
 import { PostCardFilterArea } from "./_components/postcard-filter-area";
 import { user } from "@/module/user.service";
+import { shuffle } from "@/lib/shuffle";
 
 export default async function HomePage({
   searchParams,
@@ -24,7 +25,7 @@ export default async function HomePage({
         </div>
         <div className="w-full h-full relative flex items-center">
           <InfiniteMovingCards
-            items={allPostcards}
+            items={shuffle(allPostcards).slice(0, 25)}
             direction="right"
             speed="slow"
           />
