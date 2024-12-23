@@ -54,6 +54,45 @@ class PostCard {
       },
     });
   }
+
+  async getStatistic() {
+    const totalSendFrom = await db.user.count({
+      where: {
+        sentPostCard: {
+          some: {},
+        },
+      },
+    });
+    const totalPostcards = await db.postCard.count();
+    const maximumSendFrom = await db.postCard.groupBy({
+      by: "sendFromUserId",
+      _count: {
+        sendFromUserId: true,
+      },
+      orderBy: {
+        _count: {
+          sendFromUserId: "desc",
+        },
+      },
+    });
+    const maximumSendTo = await db.postCard.groupBy({
+      by: "sendToUserId",
+      _count: {
+        sendToUserId: true,
+      },
+      orderBy: {
+        _count: {
+          sendToUserId: "desc",
+        },
+      },
+    });
+    return {
+      totalSendFrom,
+      totalPostcards,
+      maximumSendFromCount: maximumSendFrom[0]._count.sendFromUserId,
+      maximumSendToCount: maximumSendTo[0]._count.sendToUserId,
+    };
+  }
 }
 
 export const postCard = new PostCard();

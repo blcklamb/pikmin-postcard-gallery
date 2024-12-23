@@ -21,6 +21,22 @@ class User {
       },
     });
   }
+
+  async getMaximumSendFrom() {
+    const maximumSendFrom = await db.postCard.groupBy({
+      by: "sendFromUserId",
+      _count: {
+        sendFromUserId: true,
+      },
+      orderBy: {
+        _count: {
+          sendFromUserId: "desc",
+        },
+      },
+    });
+
+    return maximumSendFrom;
+  }
 }
 
 export const user = new User();

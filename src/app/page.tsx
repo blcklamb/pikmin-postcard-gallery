@@ -3,6 +3,7 @@ import { postCard } from "@/module/postcard.service";
 import { PostCardFilterArea } from "./_components/postcard-filter-area";
 import { user } from "@/module/user.service";
 import { shuffle } from "@/lib/shuffle";
+import { ResultSection } from "./_components/result-section";
 
 export default async function HomePage({
   searchParams,
@@ -16,6 +17,13 @@ export default async function HomePage({
     searchParams.sendTo as string,
     searchParams.sendFrom as string
   );
+
+  const {
+    totalSendFrom,
+    totalPostcards,
+    maximumSendFromCount,
+    maximumSendToCount,
+  } = await postCard.getStatistic();
 
   return (
     <div className="flex flex-col gap-4">
@@ -31,6 +39,12 @@ export default async function HomePage({
           />
         </div>
       </div>
+      <ResultSection
+        totalSendFrom={totalSendFrom}
+        totalPostcards={totalPostcards}
+        maximumSendFromCount={maximumSendFromCount}
+        maximumSendToCount={maximumSendToCount}
+      />
       <PostCardFilterArea users={allUsers} postCards={filteredPostcards} />
     </div>
   );
